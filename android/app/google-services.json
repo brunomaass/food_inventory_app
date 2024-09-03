@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "200041001439",
+    "project_id": "food-inventory--app",
+    "storage_bucket": "food-inventory--app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:200041001439:android:6076fd5db93e5c6d20d46a",
+        "android_client_info": {
+          "package_name": "com.example.food_inventory_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6hBYIGbq5ww6EZkRtpU_wy6404E0fC1s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

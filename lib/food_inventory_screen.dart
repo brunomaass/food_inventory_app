@@ -2,20 +2,23 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class FoodInventoryScreen extends StatefulWidget {
+  const FoodInventoryScreen({super.key});
+
 
   @override
-  _FoodInventoryScreenState createState() => _FoodInventoryScreenState();
+  FoodInventoryScreenState createState() => FoodInventoryScreenState();
 }
 
 
-class _FoodInventoryScreenState extends State<FoodInventoryScreen> {
+class FoodInventoryScreenState extends State<FoodInventoryScreen> {
   final TextEditingController  _foodController = TextEditingController();
   final TextEditingController _quantityController = TextEditingController();
   
  
   @override
   Widget build(BuildContext context) {
-    void _addFood() {
+
+    void addFood() {
     String foodName = _foodController.text;
     int quantity = int.parse(_quantityController.text);
 
@@ -28,12 +31,12 @@ class _FoodInventoryScreenState extends State<FoodInventoryScreen> {
     _quantityController.clear();
     }
 
-    void _deleteFood(String id){
+    void deleteFood(String id){
       FirebaseFirestore.instance.collection('foods').doc(id).delete();
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text("Food Inventory"),
+        title: const Text("Food Inventory"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -41,26 +44,26 @@ class _FoodInventoryScreenState extends State<FoodInventoryScreen> {
           children: [
             TextField(
               controller: _foodController,
-              decoration: InputDecoration(labelText: 'Food Name'),
+              decoration: const InputDecoration(labelText: 'Food Name'),
               keyboardType: TextInputType.text,
             ),
             TextField(
               controller: _quantityController,
-              decoration: InputDecoration(labelText: 'Quantity'),
+              decoration: const InputDecoration(labelText: 'Quantity'),
               keyboardType: TextInputType.number,
             ),
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
             ElevatedButton(
-              onPressed: _addFood, 
-              child: Text('Add Food'),
+              onPressed: addFood, 
+              child: const Text('Add Food'),
               ),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               Expanded(
                 child: StreamBuilder(
                   stream: FirebaseFirestore.instance.collection('foods').snapshots(), 
                   builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                     if (!snapshot.hasData) {
-                      return Center(child: CircularProgressIndicator());
+                      return const Center(child: CircularProgressIndicator());
                     }
                     return ListView.builder(
                       itemCount: snapshot.data!.docs.length,
@@ -70,8 +73,8 @@ class _FoodInventoryScreenState extends State<FoodInventoryScreen> {
                           title: Text(foodItem['name']),
                           subtitle: Text('Quantity: ${foodItem['quantity']}'),
                           trailing: IconButton(
-                          onPressed:  () => _deleteFood(foodItem.id),
-                          icon: Icon(Icons.delete),
+                          onPressed:  () => deleteFood(foodItem.id),
+                          icon: const Icon(Icons.delete),
                           ),
                         );
                       }
